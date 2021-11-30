@@ -29,7 +29,6 @@ public class Fox extends Animal
     
     // Individual characteristics (instance fields).
     // The fox's age.
-    private int age;
     // The fox's food level, which is increased by eating rabbits.
     private int foodLevel;
 
@@ -45,11 +44,10 @@ public class Fox extends Animal
     {
         super(field, location);
         if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
+            setAge(rand.nextInt(MAX_AGE));
             foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
         }
         else {
-            age = 0;
             foodLevel = RABBIT_FOOD_VALUE;
         }
     }
@@ -89,8 +87,8 @@ public class Fox extends Animal
      */
     private void incrementAge()
     {
-        age++;
-        if(age > MAX_AGE) {
+        setAge(getAge()+1);
+        if(getAge() > MAX_AGE) {
             setDead();
         }
     }
@@ -163,12 +161,27 @@ public class Fox extends Animal
         }
         return births;
     }
-
     /**
-     * A fox can breed if it has reached the breeding age.
+     * An animal can breed if it has reached the breeding age.
+     * @return true if the animal can breed
      */
-    private boolean canBreed()
+    @Override
+    public int getBreedingAge()
     {
-        return age >= BREEDING_AGE;
+        return BREEDING_AGE;
+    }
+    @Override
+    protected int getMaxAge()
+    {
+        return MAX_AGE;
+    }
+    @Override 
+    protected double getBreedingProbability()
+    {
+        return BREEDING_PROBABILITY;
+    }
+    @Override
+    protected int getMaxLitterSize(){
+        return MAX_LITTER_SIZE;
     }
 }

@@ -1,5 +1,5 @@
 Project: foxes-and-rabbits-v2
-Authors: Michael Kölling and David J. Barnes
+Authors: Michael Kölling and David J. Barnes, Ari Kaminski
 
 This project is part of the material for chapter 10 of the book
 
@@ -20,3 +20,13 @@ How to start:
         + simulateOneStep - for a single step.
         + simulate - and supply a number (say 10) for that many steps.
         + runLongSimulation - for a simulation of 500 steps.
+
+
+OBJECTIVE:
+
+Added abstract methods to classes.
+The public abstract method is accessible to the animal classes where the protected abstract method cannot be accessed
+We extend fox and rabbit and override inherit the behaivor from the animal class for the breed methods
+
+
+

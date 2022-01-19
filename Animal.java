@@ -1,10 +1,12 @@
 import java.util.List;
+import java.util.Random;
+
 
 /**
  * A class representing shared characteristics of animals.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29 (2)
+ * @author David J. Barnes and Michael Kölling and Ari Kaminski
+ * @version Nov 29 2021
  */
 public abstract class Animal
 {
@@ -14,6 +16,8 @@ public abstract class Animal
     private Field field;
     // The animal's position in the field.
     private Location location;
+    private int age;
+    protected static final Random rand = Randomizer.getRandom();
     
     /**
      * Create a new animal at location in field.
@@ -26,8 +30,23 @@ public abstract class Animal
         alive = true;
         this.field = field;
         setLocation(location);
+        age = 0;
     }
-    
+    /**
+     * Age getter
+     * @return returns age of animal
+     */
+    public int getAge()
+    {
+        return age;
+    }
+    /**
+     * Age Setter
+     */
+    public void setAge(int age)
+    {
+        this.age = age;
+    }
     /**
      * Make this animal act - that is: make it do
      * whatever it wants/needs to do.
@@ -88,4 +107,21 @@ public abstract class Animal
     {
         return field;
     }
+
+    public boolean canBreed()
+    {
+        return age >= getBreedingAge();
+    }
+    
+    /**
+     * These protected methods create much better cohesion between classes.
+     * Before when these methods were private, it still worked but was not effective.
+     * When we make them protected we can still call them from subclasses
+     * and not have to worry about these methods being invoke from the outside
+     * 
+     */
+    abstract protected int getBreedingAge();
+    abstract protected int getMaxAge();
+    abstract protected double getBreedingProbability();
+    abstract protected int getMaxLitterSize();
 }
